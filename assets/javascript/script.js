@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var topicsArray = ["Star Wars", "Dogs", "Cats", "Video Games"];
+  var topicsArray = ["Video Games", "Star Wars", "Dogs", "Cats"];
 
   topicsArray.forEach(function (element) {
     var topicButton = $("<button>");
@@ -15,20 +15,23 @@ $(document).ready(function () {
 
   $("#search-btn").on("click", function (event) {
     event.preventDefault();
-    var searchTopic = $("#searchForm").val();
-    console.log(searchTopic = $("#searchForm").val())
+
+    var newTopic = $("#searchForm").val();
+    console.log(newTopic);
+
     var topicButton = $("<button>");
     topicButton
       .attr({
         "type": "button",
-        "data-topic": searchTopic
+        "data-topic": String(newTopic)
       })
       .addClass("btn btn-danger banner-btn mr-2 mb-2")
-      .text(searchTopic);
+      .text(newTopic);
+
     $("#button-banner").append(topicButton);
   })
 
-  $("#button-banner .banner-btn").on("click", $(".banner-btn"), function (event) {
+  $(document).on("click", ".banner-btn", function (event) {
     event.preventDefault();
     var topic = $(this).attr("data-topic");
     var apiKey = "NoCG0rlff62KODGBPvGAvfEHqizhX4wq"
@@ -38,9 +41,9 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET"
     }).then(function (response) {
+
       var gifData = response.data;
       $("#gif-container").empty();
-
       for (var i = 0; i < gifData.length; i++) {
         var gifDiv = $("<div>");
         var rating = gifData[i].rating.toUpperCase();
