@@ -15,20 +15,18 @@ $(document).ready(function () {
 
   $("#search-btn").on("click", function (event) {
     event.preventDefault();
-
-    var newTopic = $("#searchForm").val();
-    console.log(newTopic);
-
-    var topicButton = $("<button>");
-    topicButton
-      .attr({
-        "type": "button",
-        "data-topic": String(newTopic)
-      })
-      .addClass("btn btn-danger banner-btn mr-2 mb-2")
-      .text(newTopic);
-
-    $("#button-banner").append(topicButton);
+    var newTopic = $("#searchForm").val().trim();
+    if (newTopic !== "") {
+      var topicButton = $("<button>");
+      topicButton
+        .attr({
+          "type": "button",
+          "data-topic": newTopic
+        })
+        .addClass("btn btn-danger banner-btn mr-2 mb-2 capitalize")
+        .text(newTopic);
+      $("#button-banner").append(topicButton);
+    }
   })
 
   $(document).on("click", ".banner-btn", function (event) {
@@ -49,6 +47,7 @@ $(document).ready(function () {
         var rating = gifData[i].rating.toUpperCase();
         var p = $("<p>").text("Rating: " + rating);
         var gif = $("<img>");
+        p.addClass("mb-2")
         gif
           .attr({
             "src": gifData[i].images.original_still.url,
