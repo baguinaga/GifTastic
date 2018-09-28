@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var topicsArray = ["Video Games", "Star Wars", "Dogs", "Cats"];
+  var topicsArray = ["video games", "star Wars", "movies", "dogs", "cats"];
 
   topicsArray.forEach(function (element) {
     var topicButton = $("<button>");
@@ -8,25 +8,26 @@ $(document).ready(function () {
         "type": "button",
         "data-topic": element
       })
-      .addClass("btn btn-danger banner-btn mr-2 mb-2")
+      .addClass("btn banner-btn mr-2 mb-2 btn-style")
       .text(element);
     $("#button-banner").append(topicButton);
   })
 
   $("#search-btn").on("click", function (event) {
     event.preventDefault();
-    var newTopic = $("#searchForm").val().trim();
-    if (newTopic !== "") {
+    var newTopic = $("#searchForm").val().trim().toLowerCase();
+    if (newTopic !== "" && !topicsArray.includes(newTopic)) {
       var topicButton = $("<button>");
       topicButton
         .attr({
           "type": "button",
           "data-topic": newTopic
         })
-        .addClass("btn btn-danger banner-btn mr-2 mb-2 capitalize")
+        .addClass("btn banner-btn mr-2 mb-2 btn-style")
         .text(newTopic);
       $("#button-banner").append(topicButton);
     }
+    topicsArray.push(newTopic);
   })
 
   $(document).on("click", ".banner-btn", function (event) {
@@ -47,7 +48,9 @@ $(document).ready(function () {
         var rating = gifData[i].rating.toUpperCase();
         var p = $("<p>").text("Rating: " + rating);
         var gif = $("<img>");
-        p.addClass("mb-2")
+
+        p
+          .addClass("mb-2")
         gif
           .attr({
             "src": gifData[i].images.original_still.url,
@@ -57,9 +60,9 @@ $(document).ready(function () {
           })
           .addClass("img-fluid img-thumbnail");
         gifDiv
-          .addClass("col-4 my-auto")
-          .append(p)
-          .append(gif);
+          .addClass("col-4 mt-2 pt-4")
+          .append(gif)
+          .append(p);
         $("#gif-container").append(gifDiv);
       }
 

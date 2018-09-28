@@ -2,10 +2,41 @@
   box-sizing: border-box;
 }
 
+body {
+  background: url(../images/skulls.png)
+}
+
+h1,
+h2 {
+  font-family: 'Antic Slab', serif;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  color:#ffffff;
+  text-shadow: 2px 2px 8px #000000
+}
+
 .subText {
   font-size: 1.5em;
 }
 
-.capitalize {
+.btn-style{
+  background: #C2B687;
   text-transform: capitalize;
+  color:#ffffff;
+}
+
+#gif-container {
+  background: rgba(85, 75, 60, 0.35);
+}
+
+#banner {
+  background: rgba(210,216,235, 0.9);
+}
+
+#header {
+  background: #54618C;
+  color: #ffffff;
+  margin-bottom: 0;
 }
